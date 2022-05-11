@@ -1,41 +1,10 @@
-first iteration: Tubes created for flappy bird game
+Third Update to Code:
 
-
-
-
-// top tube 
-
-
-var topTube= function(x,y,h){
-fill(14, 163, 6);
-    rect(x,y-100, 50,145 ); // shaft of tube
-    rect(x-4,y+36, 59,21 ); // exit of tube 
-fill(38, 255, 0);
-    rect(x, y-100, 4, 135); // left highlight
-    rect(x+42, y-100, 4, 135); // right highlight
-fill(4, 112, 29);
-    rect(x+45,y-100, 4, 135); // right shadow
-};
-
-var bottomTube=function (x,y,h) {
-// bottom tube 
-fill(14, 163, 6);
-    rect(x,y+163, 50,145 ); // shaft of tube
-    rect(x-4,y+142, 59,21 ); // exit of tube 
-fill(38, 255, 0);
-    rect(x, y+164, 4, 135); // left highlight
-    rect(x+42, y+163, 4, 135); // right highlight
-fill(4, 112, 29);
-    rect(x+45, y+163, 4, 135); // right shadow
-};
-
-topTube(100,100);
-
-bottomTube(100,100);
-
-Second Iteration of Code - Adding our bitmojis and Pushing in the Tubes and grass and making the button 
 var currentScene = 0; 
 
+var currentScene = 0; 
+var Timer = millis();
+var gameOver = false ; 
 var bitmojiHead= function (bitmojiX,bitmojiY,bitmojiHeight){
     noStroke();
     fill(176, 108, 73);//skintone
@@ -96,28 +65,29 @@ var drawBitmoji= function(bitmojiX,bitmojiY,bitmojiHeight){
 }; //draw Jordans bitmoji
 
 
-var topTube = function (x , y ,h ){
+var topTube = function (x , y){
 // top tube 
-fill(14, 163, 6);
-    rect(x,y-100, 50,245 ); // shaft of tube
-    rect(x-4 ,y+131 , 59,21 ); // exit of tube 
-fill(38, 255, 0);
+    fill(14, 163, 6);
+    rect(x,y, 50,245 ); // shaft of tube
+    rect(x-4 ,y+227 , 59,21 ); // exit of tube 
+    fill(38, 255, 0);
     rect(x, y-100, 4, 135); // left highlight
     rect(x+42, y-100, 4, 135); // right highlight
-fill(4, 112, 29);
+    fill(4, 112, 29);
     rect(x+45,y-100, 4, 135); // right shadow
 };//top tube
-var bottomTube= function(x,y,h){
+var bottomTube= function(x,y){
 // bottom tube 
-fill(14, 163, 6);
-    rect(x,y+163, 50,245 ); // shaft of tube
-    rect(x-4,y+142, 59,21 ); // exit of tube 
-fill(38, 255, 0);
+    fill(14, 163, 6);
+    rect(x,y, 50,245 ); // shaft of tube
+    rect(x-4,y-3, 59,21 ); // exit of tube 
+    fill(38, 255, 0);
     rect(x, y+164, 4, 135); // left highlight
     rect(x+42,y+163, 4, 135); // right highlight
-fill(4, 112, 29);
+    fill(4, 112, 29);
     rect(x+45, y+163, 4, 135); // right shadow
 };// bottom tube
+
 
 var drawGBitmoji = function(x, y, drawHead){
 fill(212, 191, 115);//yellrow hair
@@ -162,6 +132,42 @@ fill(250, 120, 237);
     text("GU",x-drawHead/120*25,y+drawHead/120*170);
 }; // draw giuliana's bitmoji
 
+var Bird = function(x, y) {
+    this.x = x;
+    this.y = y;
+    // drawGBitmoji(); // draw  bitmoji function  
+    this.sticks = 0;
+}; // constructer function for the beaver class
+ 
+
+Bird.prototype.draw = function() {
+    fill(255, 0, 0);
+    this.y = constrain(this.y, 0, height-80);
+    image(this.img, this.x, this.y, 40 , 40);
+};
+  
+Bird.prototype.hop = function() {
+    this.img = getImage("avatars/aqualine-tree");
+    this.y -= 1.5; // bird goes up
+};
+
+Bird.prototype.fall = function() {
+    this.img = getImage("avatars/aqualine-tree" );
+    this.y += 1;//bird goes down
+};
+
+Bird.prototype.checkForHit = function(tubeX,tubeY) {
+    if ((this.x >= (tubeX-40) && this.x <= (tubeX  + 50 )) &&    
+    (this.y >= (tubeY-40)  && this.y <= (tubeY + 250))
+    ) 
+        {
+        gameOver=true;
+        
+    }
+};
+
+
+var bird = new Bird(200, 300);
 var Button = function(config) { //constructor function
     this.x = config.x || 0;
     this.y = config.y || 0;
@@ -197,12 +203,24 @@ Button.prototype.handleMouseClick = function() {
 var startButton = new Button({
     x: 103,
     y: 318,
-    label: "Play!",
+    label: "       Play!",
     onClick: function() { //start button
-       currentScene = 1;
+       currentScene = 2;
+       Timer= millis();
        
     }
 });
+
+var InstructionsButton = new Button({
+    x: 103,
+    y: 206,
+    label: "  Instructions",
+    onClick: function() { //instructions button
+       currentScene=1;
+       
+    }
+});
+
 
 mouseClicked = function() {
     if (currentScene === 0) {
@@ -210,28 +228,27 @@ mouseClicked = function() {
 }
 };
 
-var grassXs = []; // array for grass
+var grassXs = []; // array for grass ( Borrowed
 
-    for (var i = 0; i < 25; i++) { 
-        grassXs.push(i*20);
-    }
+for (var i = 0; i < 25; i++) { 
+    grassXs.push(i*20);
+}
 
 var tubesXs = [];
 
-    for (var j = 0; j < 100 ; j++){
-        tubesXs.push( j* 350);
-    }
+for (var j = 0; j < 100 ; j++){
+    tubesXs.push( j* 350);
+}
 
 var bottomYs=[];
 
 
 var tubesYs= [];
     
-    for (var i=0; i < 20; i++) {
-        
-     var randomNum= random(30,150);
-      tubesYs.push(randomNum);
-      bottomYs.push(randomNum+80);
+    for (var i=0; i < 20; i++) {  
+    
+        tubesYs.push(random(-50, -10));
+        bottomYs.push(random(300, 306));
     }
     
 
@@ -242,14 +259,40 @@ var splashScreen = function(){
     drawGBitmoji( 330, 272, 73);
     fill(0, 0, 0);
     text("Giuliana's and Jordan's Flappy Bird", 33, 42); //splash screen
+    textSize(12);
+     text("This Game is very simple, use spacebar to move your character up.", 33, 89); //splash screen
+     text("release space bar to go back down.", 95, 117); //splash screen
+    textSize(20);
+    text("See how long you can last!", 71, 147);
+    
     startButton.draw();
+    InstructionsButton.draw();
 };
 
+
+
+    text("This Game is very simple, use spacebar to move your character up, release space bar to go back down.", 33, 42); //splash screen
+    text("See how long you can last", 33, 42);
+    
 
 draw = function() {
     if (currentScene === 0){
        splashScreen();
     }
+    
+
+    
+     
+    else if (gameOver===true){
+        
+        textSize(20);
+        text("GameOver",150,200);
+        text("You Survived:" +" "+ round((millis() - Timer)/1000) +" " +"Seconds!!",96,219);
+    
+        return ;
+    }
+         
+    
     else{
     // static
     background(227, 254, 255);
@@ -261,7 +304,11 @@ draw = function() {
     ellipse(333, 62, 50,  50); // sun 
     //moving
     stroke(23, 105, 0);
+    fill(13, 5, 255);
     
+text("Time:"+ " "+ round((millis() - Timer)/1000),10,10);
+ // add if tube bit stop timer and reset when starting over
+ // if(tube hit) { timer = false;}
     for (var i = 0; i < grassXs.length; i++) {
         image(getImage("cute/GrassBlock"), grassXs[i], height*0.85, 20, 20);
         grassXs[i] -= 1;
@@ -269,22 +316,25 @@ draw = function() {
             grassXs[i] = width;
         }
     }
+
+
     
     for ( var j = 0; j < tubesXs.length; j++)
     {
     
-    tubesXs[j]-=1;
-    topTube(tubesXs[j],tubesYs[j],100);
-    bottomTube(tubesXs[j],bottomYs[j],100);
+        tubesXs[j]-=1;
+        topTube(tubesXs[j],tubesYs[j]);
+        bottomTube(tubesXs[j],bottomYs[j]);
+        bird.checkForHit(tubesXs[j],tubesYs[j]); 
+        bird.checkForHit(tubesXs[j],bottomYs[j]); 
+        
     }
-  
+  if (keyIsPressed && keyCode === 0) {
+        bird.hop();
+    } else {
+        bird.fall();
     }
-};
-
-
+    bird.draw();  
+    }
     
-
-
-
-
-
+};
