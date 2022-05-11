@@ -33,5 +33,258 @@ topTube(100,100);
 
 bottomTube(100,100);
 
+Second Iteration of Code - Adding our bitmojis and Pushing in the Tubes and grass and making the button 
+var currentScene = 0; 
+
+var bitmojiHead= function (bitmojiX,bitmojiY,bitmojiHeight){
+    noStroke();
+    fill(176, 108, 73);//skintone
+    ellipse(bitmojiX+(bitmojiHeight/150),bitmojiY+bitmojiHeight/150,bitmojiHeight/150*83    ,bitmojiHeight/150*100);//head
+
+    fill(3, 3, 3);
+    arc(bitmojiX+(bitmojiHeight/150),bitmojiY-(bitmojiHeight/150*20),bitmojiHeight/150*82,bitmojiHeight/150*57,179,364);//hair
+    rect(bitmojiX-(bitmojiHeight/150*40),bitmojiY-(bitmojiHeight/150*23),bitmojiHeight/150*21,bitmojiHeight/150*13);//hairline (left box)
+    rect(bitmojiX+(bitmojiHeight/150*22),bitmojiY-(bitmojiHeight/150*22),bitmojiHeight/150*19,bitmojiHeight/150*13);//hairline (right box)
+   
+
+    fill(255, 255, 255);
+    arc(bitmojiX+(bitmojiHeight/150*42),bitmojiY+(bitmojiHeight/150*37),bitmojiHeight/150*28    ,bitmojiHeight/150*55,bitmojiHeight/150,bitmojiHeight/150*361);//right chisel
+    arc(bitmojiX-(bitmojiHeight/150*42),bitmojiY+(bitmojiHeight/150*37),bitmojiHeight/150*28     ,bitmojiHeight/150*55,bitmojiHeight/150,bitmojiHeight/150*361);//left chisel
+
+ellipse(bitmojiX-(bitmojiHeight/150*20),bitmojiY+(bitmojiHeight/150),bitmojiHeight/150*20,bitmojiHeight/150*10);//white surrounding pupil
+ellipse(bitmojiX+(bitmojiHeight/150*19),bitmojiY+(bitmojiHeight/150),bitmojiHeight/150*20,bitmojiHeight/150*10);//white surrounding pupil
+
+};
+
+var bitmojiFace= function(bitmojiX,bitmojiY,bitmojiHeight){
+
+    fill(155,23,23);
+ellipse(bitmojiX+(bitmojiHeight/150*20),bitmojiY+(bitmojiHeight/150),bitmojiHeight/150*5,bitmojiHeight/150*4);//left pupil
+ellipse(bitmojiX-(bitmojiHeight/150*17),bitmojiY+(bitmojiHeight/150),bitmojiHeight/150*5,bitmojiHeight/150*4);//right pupil
+
+stroke(0, 0, 0);
+fill(176,108,73);//fill for nose
+bezier(bitmojiX+bitmojiHeight/150,bitmojiY+bitmojiHeight/150,bitmojiX+(bitmojiHeight/150*21),bitmojiY+(bitmojiHeight/150*22),bitmojiX-(bitmojiHeight/150*8),bitmojiY+(bitmojiHeight/150*20),bitmojiX-(bitmojiHeight/150*4),bitmojiY+(bitmojiHeight/150*15));//nose
+
+
+fill(255,255,255);
+arc(bitmojiX+(bitmojiHeight/150*1),bitmojiY+(bitmojiHeight/150*31),bitmojiHeight/150*33,bitmojiHeight/150*17,1,179);//mouth
+
+strokeWeight(5);
+line(bitmojiX-(bitmojiHeight/150*18),bitmojiY+(bitmojiHeight/150*24),bitmojiX+(bitmojiHeight/150*20),bitmojiY+(bitmojiHeight/150*24));//beardline
+line(bitmojiX-(bitmojiHeight/150*18),bitmojiY+(bitmojiHeight/150*24),bitmojiX-(bitmojiHeight/150*18),bitmojiY+(bitmojiHeight/150*42));//beardline
+line(bitmojiX+(bitmojiHeight/150*22),bitmojiY+(bitmojiHeight/150*24),bitmojiX+(bitmojiHeight/150*21),bitmojiY+(bitmojiHeight/150*42));//beardline
+};
+
+var bitmojiBody= function (bitmojiX,bitmojiY,bitmojiHeight) {
+    noStroke();
+fill(176, 108, 73);//skintone for neck
+rect(bitmojiX-(bitmojiHeight/150*14),bitmojiY+(bitmojiHeight/150*43),bitmojiHeight/150*31,bitmojiHeight/150*24);//neck
+
+fill(0, 0, 0);
+arc(bitmojiX+(bitmojiHeight/150*1),bitmojiY+(bitmojiHeight/150*40),bitmojiHeight/150*41,bitmojiHeight/150*23,1,179);//beard
+
+
+rect(bitmojiX-(bitmojiHeight/150*44),bitmojiY+(bitmojiHeight/150*62),bitmojiHeight/150*90,bitmojiHeight/150*119);//body
+
+};
+
+var drawBitmoji= function(bitmojiX,bitmojiY,bitmojiHeight){
+    bitmojiHead(bitmojiX,bitmojiY,bitmojiHeight);
+    bitmojiFace(bitmojiX,bitmojiY,bitmojiHeight);
+    bitmojiBody(bitmojiX,bitmojiY,bitmojiHeight);
+}; //draw Jordans bitmoji
+
+
+var topTube = function (x , y ,h ){
+// top tube 
+fill(14, 163, 6);
+    rect(x,y-100, 50,245 ); // shaft of tube
+    rect(x-4 ,y+131 , 59,21 ); // exit of tube 
+fill(38, 255, 0);
+    rect(x, y-100, 4, 135); // left highlight
+    rect(x+42, y-100, 4, 135); // right highlight
+fill(4, 112, 29);
+    rect(x+45,y-100, 4, 135); // right shadow
+};//top tube
+var bottomTube= function(x,y,h){
+// bottom tube 
+fill(14, 163, 6);
+    rect(x,y+163, 50,245 ); // shaft of tube
+    rect(x-4,y+142, 59,21 ); // exit of tube 
+fill(38, 255, 0);
+    rect(x, y+164, 4, 135); // left highlight
+    rect(x+42,y+163, 4, 135); // right highlight
+fill(4, 112, 29);
+    rect(x+45, y+163, 4, 135); // right shadow
+};// bottom tube
+
+var drawGBitmoji = function(x, y, drawHead){
+fill(212, 191, 115);//yellrow hair
+    rect(x-(drawHead/120*100),y-(drawHead/120*20),drawHead/120*200,drawHead/120*200,drawHead/120*120);//hair
+    ellipse(x-drawHead/120,y-drawHead/120,drawHead/120*100,drawHead/120*10);//hair
+fill(252, 230, 171);//tan
+    rect(x-drawHead/120*20,y+drawHead/120*90,drawHead/120*40,drawHead/120*40,drawHead/120*0);//neck
+    ellipse(x-drawHead/120,y+drawHead/120*50,drawHead/120*100,drawHead/120*120); //head
+    ellipse(x+drawHead/120*55,y+drawHead/120*54,drawHead/120*10,drawHead/120*25);// right ear
+    ellipse(x-drawHead/120*55,y+drawHead/120*54,drawHead/120*10,drawHead/120*25);//left ear
+    rect(x-drawHead/120*6,y+drawHead/120*70,drawHead/120*10,drawHead/120,drawHead/120*0);// nose 
+fill(0,0,0);
+    ellipse(x+drawHead/120*55,y+drawHead/120*60,drawHead/120*3,drawHead/120*3);//earring right
+    ellipse(x-drawHead/120*55,y+drawHead/120*60,drawHead/120*3,drawHead/120*3);//earring left
+fill(212,191,115); noStroke();
+    ellipse(x+drawHead/120,y+drawHead/120,drawHead/120*100,drawHead/120*30);//hairline
+stroke(0, 0, 0); fill(255, 255, 255); //white
+    ellipse(x-drawHead/120*20,y+drawHead/120*45,drawHead/120*20,drawHead/120*20);//white eye left
+    ellipse(x+drawHead/120*20,y+drawHead/120*45,drawHead/120*20,drawHead/120*20);// white eye right
+fill(63, 88, 176);//blue
+    ellipse(x-drawHead/120*20,y+drawHead/120*47,drawHead/120*10,drawHead/120*10);//blue eye left
+    ellipse(x+drawHead/120*20,y+drawHead/120*47,drawHead/120*10,drawHead/120*10);//blue eye right
+fill(0,0,0); //black
+    ellipse(x-drawHead/120*20,y+drawHead/120*48,drawHead/120*5,drawHead/120*5);//pupil left
+    ellipse(x+drawHead/120*20,y+drawHead/120*48,drawHead/120*5,drawHead/120*5);//pupil right
+noStroke();fill(255,0,0);//red 
+    ellipse(x+drawHead/120*0,y+ drawHead/120*90,drawHead/120*20,drawHead/120*3);// mouth
+stroke(8, 8, 8);fill(140, 83, 3);
+    rect(x-drawHead/120*25,y+drawHead/120*120,drawHead/120*50,drawHead/120*30,drawHead/120*0);//turtle neck
+    rect(x-drawHead/120*50,y+drawHead/120*140,drawHead/120*100,drawHead/120*50,drawHead/120*0);// shirt
+fill(0,0,0);
+    ellipse(x-drawHead/120*20,y+drawHead/120,drawHead/120*30,drawHead/120*20);// left lens
+    ellipse(x+drawHead/120*20,y+drawHead/120,drawHead/120*30,drawHead/120*20);// right lens
+    rect(x-drawHead/120*46,y+drawHead/120,drawHead/120*90,drawHead/120,drawHead/120*0);// center connect 
+    rect(x-drawHead/120*45,y+drawHead/120,drawHead/120,drawHead/120*20,drawHead/120*0);//left side of sunglasses
+    rect(x+drawHead/120*45,y-drawHead/120,drawHead/120,drawHead/120*20,drawHead/120*0); //right side of sunglasses
+fill(77, 71, 14);
+    rect(x-drawHead/120*30,y+drawHead/120*30,drawHead/120*15,drawHead/120,drawHead/120*0);// left eye brow
+    rect(x+drawHead/120*10,y+drawHead/120*30,drawHead/120*15,drawHead/120,drawHead/120*0);// right eye brow
+fill(250, 120, 237);
+   textSize(drawHead/120*35);
+    text("GU",x-drawHead/120*25,y+drawHead/120*170);
+}; // draw giuliana's bitmoji
+
+var Button = function(config) { //constructor function
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 150;
+    this.height = config.height || 50;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    fill(0, 238, 255);
+    rect(this.x, this.y, this.width, this.height, 5);
+    fill(0, 0, 0);
+    textSize(20);
+    textAlign(LEFT, TOP);
+    text(this.label, this.x+10, this.y+this.height/4);
+};
+
+Button.prototype.isMouseInside = function() {
+    return mouseX > this.x &&
+           mouseX < (this.x + this.width) &&
+           mouseY > this.y &&
+           mouseY < (this.y + this.height);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+
+
+var startButton = new Button({
+    x: 103,
+    y: 318,
+    label: "Play!",
+    onClick: function() { //start button
+       currentScene = 1;
+       
+    }
+});
+
+mouseClicked = function() {
+    if (currentScene === 0) {
+    startButton.handleMouseClick();
+}
+};
+
+var grassXs = []; // array for grass
+
+    for (var i = 0; i < 25; i++) { 
+        grassXs.push(i*20);
+    }
+
+var tubesXs = [];
+
+    for (var j = 0; j < 100 ; j++){
+        tubesXs.push( j* 350);
+    }
+
+var bottomYs=[];
+
+
+var tubesYs= [];
+    
+    for (var i=0; i < 20; i++) {
+        
+     var randomNum= random(30,150);
+      tubesYs.push(randomNum);
+      bottomYs.push(randomNum+80);
+    }
+    
+
+    
+var splashScreen = function(){
+    background(191, 255, 223);
+    drawBitmoji(51,271,100);
+    drawGBitmoji( 330, 272, 73);
+    fill(0, 0, 0);
+    text("Giuliana's and Jordan's Flappy Bird", 33, 42); //splash screen
+    startButton.draw();
+};
+
+
+draw = function() {
+    if (currentScene === 0){
+       splashScreen();
+    }
+    else{
+    // static
+    background(227, 254, 255);
+    fill(130, 79, 43);
+    rectMode(CORNER);
+    rect(0, height*0.90, width, height*0.10);
+    fill(255, 238, 0);
+    noStroke();
+    ellipse(333, 62, 50,  50); // sun 
+    //moving
+    stroke(23, 105, 0);
+    
+    for (var i = 0; i < grassXs.length; i++) {
+        image(getImage("cute/GrassBlock"), grassXs[i], height*0.85, 20, 20);
+        grassXs[i] -= 1;
+        if (grassXs[i] <= -20) {
+            grassXs[i] = width;
+        }
+    }
+    
+    for ( var j = 0; j < tubesXs.length; j++)
+    {
+    
+    tubesXs[j]-=1;
+    topTube(tubesXs[j],tubesYs[j],100);
+    bottomTube(tubesXs[j],bottomYs[j],100);
+    }
+  
+    }
+};
+
+
+    
+
+
+
 
 
