@@ -1,0 +1,37 @@
+first iteration: Tubes created for flappy bird game
+
+
+
+
+// top tube 
+
+
+var topTube= function(x,y,h){
+fill(14, 163, 6);
+    rect(x,y-100, 50,145 ); // shaft of tube
+    rect(x-4,y+36, 59,21 ); // exit of tube 
+fill(38, 255, 0);
+    rect(x, y-100, 4, 135); // left highlight
+    rect(x+42, y-100, 4, 135); // right highlight
+fill(4, 112, 29);
+    rect(x+45,y-100, 4, 135); // right shadow
+};
+
+var bottomTube=function (x,y,h) {
+// bottom tube 
+fill(14, 163, 6);
+    rect(x,y+163, 50,145 ); // shaft of tube
+    rect(x-4,y+142, 59,21 ); // exit of tube 
+fill(38, 255, 0);
+    rect(x, y+164, 4, 135); // left highlight
+    rect(x+42, y+163, 4, 135); // right highlight
+fill(4, 112, 29);
+    rect(x+45, y+163, 4, 135); // right shadow
+};
+
+topTube(100,100);
+
+bottomTube(100,100);
+
+
+
