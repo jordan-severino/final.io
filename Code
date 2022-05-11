@@ -1,9 +1,6 @@
-Third Update to Code:
-
-var currentScene = 0; 
-
 var currentScene = 0; 
 var Timer = millis();
+
 var gameOver = false ; 
 var bitmojiHead= function (bitmojiX,bitmojiY,bitmojiHeight){
     noStroke();
@@ -245,7 +242,7 @@ var bottomYs=[];
 
 var tubesYs= [];
     
-    for (var i=0; i < 20; i++) {  
+    for (var i=0; i < 100; i++) {  
     
         tubesYs.push(random(-50, -10));
         bottomYs.push(random(300, 306));
@@ -284,14 +281,25 @@ draw = function() {
     
      
     else if (gameOver===true){
-        
-        textSize(20);
-        text("GameOver",150,200);
-        text("You Survived:" +" "+ round((millis() - Timer)/1000) +" " +"Seconds!!",96,219);
+       
+    textSize(40);
+    fill(255, 0, 0);
+    text("GameOver",97,82);
+    textSize(30);
+    
+    fill(255, 255, 255);
+    ellipse(251,237,349,75);
+    fill(255, 0, 0);
+    text("Thats all you got???",105,219);
+    fill(255, 255, 255);
+    ellipse(176,323,178,75);
+    fill(255, 0, 0);
+    text("Do better...",105,306);
+    drawBitmoji(51,271,100);
+    drawGBitmoji( 330, 272, 73);
     
         return ;
     }
-         
     
     else{
     // static
@@ -305,8 +313,8 @@ draw = function() {
     //moving
     stroke(23, 105, 0);
     fill(13, 5, 255);
-    
-text("Time:"+ " "+ round((millis() - Timer)/1000),10,10);
+    text("Time:"+ " "+ round((millis() - Timer)/1000),10,10);
+
  // add if tube bit stop timer and reset when starting over
  // if(tube hit) { timer = false;}
     for (var i = 0; i < grassXs.length; i++) {
@@ -317,12 +325,14 @@ text("Time:"+ " "+ round((millis() - Timer)/1000),10,10);
         }
     }
 
-
+    var numTubes=100;
     
-    for ( var j = 0; j < tubesXs.length; j++)
+    for ( var j = 0; j < numTubes; j++)
     {
     
         tubesXs[j]-=1;
+        if (tubesXs[10]<400){ tubesXs[j]-=2;}//changes speed after 10 tubes
+        if (tubesXs[20]<400){ tubesXs[j]-=3;}// changes speed after 20 tubes
         topTube(tubesXs[j],tubesYs[j]);
         bottomTube(tubesXs[j],bottomYs[j]);
         bird.checkForHit(tubesXs[j],tubesYs[j]); 
